@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <import resource="services.xml" />
+
+    <bean id = "client1" class = "clients.Client">
+        <constructor-arg name="salary" value="1000"/>
+    </bean>
+    <bean id = "client2" class = "clients.Client">
+        <constructor-arg name="salary" value="2000"/>
+    </bean>
+    <bean id = "client3" class = "clients.Client">
+        <constructor-arg name="salary" value="3000"/>
+    </bean>
+    <bean id = "client4" class = "clients.Client">
+        <constructor-arg name="salary" value="4000"/>
+    </bean>
+
+    <util:list id="clients" scope="singleton" list-class="java.util.ArrayList">
+        <ref bean="client1"/>
+        <ref bean="client2"/>
+        <ref bean="client3"/>
+        <ref bean="client4"/>
+    </util:list>
+
+    <bean id="bank" class="bank.Bank">
+        <constructor-arg name="clients" ref="clients"/>
+    </bean>
+</beans>
